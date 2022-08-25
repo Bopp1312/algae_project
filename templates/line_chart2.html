@@ -1,0 +1,31 @@
+<head>
+  <meta charset="utf-8" />
+  <title>{{ title }}</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script> 
+</head>
+
+<body>
+  <center>
+    <h1>{{ title }}</h1>
+
+    <canvas id="chart" width="800" height="800"></canvas>
+    <script>
+      var ctx = document.getElementById("lineChart").getContext("2d");
+      var lineChart = new Chart(ctx, {
+        type: "line",
+        data: {
+        labels: [{% for item in labels %}
+		    "{{ item }}",
+		    {% endfor %}
+		    ],
+        datasets: [{
+	    data: [{% for item in values %}
+		    {{ item }},
+		    {% endfor %}]
+		      }]
+          } 
+        }
+      )
+    </script>
+  </center>
+</body>
